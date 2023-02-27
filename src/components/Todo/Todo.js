@@ -2,16 +2,22 @@ import { BiCheckCircle } from "react-icons/bi";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 
-const Todo = () => {
+const Todo = ({ todo }) => {
    return (
       <div>
          {/* tood details */}
          <div>
             {/* todo title */}
-            <h2>todo title</h2>
+            <h2>{todo.title}</h2>
 
             {/* todo careted date */}
-            <p>23/2/20</p>
+            <p>
+               {new Date(todo.createdAt).toLocaleString("en", {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+               })}
+            </p>
 
             {/* completed line  */}
             <span></span>

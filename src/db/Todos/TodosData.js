@@ -1,4 +1,4 @@
-export const todosDate = [
+const todosData = [
    {
       id: 1,
       title: "todo1",
@@ -30,3 +30,5 @@ export const todosDate = [
       isCompleted: false,
    },
 ];
+
+export default todosData;

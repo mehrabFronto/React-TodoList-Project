@@ -1,9 +1,10 @@
 import TodosProvider from "./components/Providers/TodosProvider";
 import TodoApp from "./components/TodoApp/TodoApp";
+import "./app.css";
 
 const App = () => {
    return (
-      <div>
+      <div className="app">
          <TodosProvider>
             <TodoApp />
          </TodosProvider>

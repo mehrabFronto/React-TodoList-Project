@@ -1,12 +1,16 @@
+import styles from "./todo.module.css";
 import { BiCheckCircle } from "react-icons/bi";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 
 const Todo = ({ todo }) => {
    return (
-      <div>
+      <div
+         className={`${styles.todo} ${
+            todo.isCompleted ? styles.complete : null
+         }`}>
          {/* tood details */}
-         <div>
+         <div className={styles.todo__detail}>
             {/* todo title */}
             <h2>{todo.title}</h2>
 
@@ -20,22 +24,25 @@ const Todo = ({ todo }) => {
             </p>
 
             {/* completed line  */}
-            <span></span>
+            <span
+               className={`${
+                  todo.isCompleted ? styles.lineThrow : null
+               }`}></span>
          </div>
          {/* todo buttons */}
-         <div>
+         <div className={styles.todo__buttonsConatiner}>
             {/* remove butoon */}
-            <button>
+            <button className={styles.btn}>
                <BiTrash />
             </button>
 
             {/* edit butoon */}
-            <button>
+            <button className={styles.btn}>
                <BiEdit />
             </button>
 
             {/* complete butoon */}
-            <button>
+            <button className={styles.btn}>
                <BiCheckCircle />
             </button>
          </div>

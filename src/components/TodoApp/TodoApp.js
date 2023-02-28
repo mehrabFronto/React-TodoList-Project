@@ -4,7 +4,7 @@ import TodoList from "../TodoList/TodoList";
 
 const TodoApp = () => {
    return (
-      <div>
+      <div className="app">
          <Header />
          <TodoForm />
          <TodoList />

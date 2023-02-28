@@ -1,5 +1,6 @@
 import { useTodos } from "../Providers/TodosProvider";
 import Todo from "../Todo/Todo";
+import styles from "./todoList.module.css";
 
 const TodoList = () => {
    const todos = useTodos();
@@ -7,14 +8,14 @@ const TodoList = () => {
    const renderTodos = () => {
       if (todos.length === 0)
          return (
-            <div>
+            <div className={styles.Message}>
                <p>there are no todos yet</p>
                <span>add some todos</span>
             </div>
          );
 
       return (
-         <div>
+         <div className={styles.todo__list}>
             {todos.map((todo) => {
                return (
                   <Todo

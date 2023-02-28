@@ -1,6 +1,8 @@
+import styles from "./navBar.module.css";
+
 const NavBar = () => {
    return (
-      <nav>
+      <nav className={styles.navbar}>
          <h1>Todo List Application</h1>
       </nav>
    );

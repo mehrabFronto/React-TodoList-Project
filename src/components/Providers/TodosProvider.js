@@ -22,6 +22,9 @@ const reducer = (state, action) => {
             },
          ];
       }
+      case "removeTodo": {
+         return state.filter((todo) => todo.id !== action.id);
+      }
 
       default:
          return state;

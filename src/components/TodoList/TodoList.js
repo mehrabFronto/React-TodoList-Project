@@ -1,9 +1,10 @@
-import { useTodos } from "../Providers/TodosProvider";
+import { useTodos, useTodosActions } from "../Providers/TodosProvider";
 import Todo from "../Todo/Todo";
 import styles from "./todoList.module.css";
 
 const TodoList = () => {
    const todos = useTodos();
+   const dispatch = useTodosActions();
 
    const renderTodos = () => {
       if (todos.length === 0)
@@ -21,6 +22,9 @@ const TodoList = () => {
                   <Todo
                      todo={todo}
                      key={todo.id}
+                     onRemove={() =>
+                        dispatch({ type: "removeTodo", id: todo.id })
+                     }
                   />
                );
             })}

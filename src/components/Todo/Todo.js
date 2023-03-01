@@ -3,7 +3,7 @@ import { BiCheckCircle } from "react-icons/bi";
 import { BiEdit } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 
-const Todo = ({ todo, onRemove, onComplete }) => {
+const Todo = ({ todo, onRemove, onComplete, onEdit }) => {
    return (
       <div
          className={`${styles.todo} ${
@@ -39,13 +39,16 @@ const Todo = ({ todo, onRemove, onComplete }) => {
             </button>
 
             {/* edit butoon */}
-            <button className={styles.btn}>
+            <button
+               className={styles.btn}
+               onClick={onEdit}>
                <BiEdit />
             </button>
 
             {/* complete butoon */}
             <button
                className={styles.btn}
+               s
                onClick={onComplete}>
                <BiCheckCircle />
             </button>

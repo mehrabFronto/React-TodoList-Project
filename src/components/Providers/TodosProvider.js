@@ -38,6 +38,18 @@ const reducer = (state, action) => {
          return updatedTodos;
       }
 
+      case "editTodo": {
+         const index = state.findIndex((todo) => todo.id === action.id);
+
+         const selectedTodo = { ...state[index] };
+
+         selectedTodo.title = action.todoTitle;
+
+         const updatedTodos = [...state];
+         updatedTodos[index] = selectedTodo;
+         return updatedTodos;
+      }
+
       default:
          return state;
    }

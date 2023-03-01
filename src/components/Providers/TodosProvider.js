@@ -26,6 +26,18 @@ const reducer = (state, action) => {
          return state.filter((todo) => todo.id !== action.id);
       }
 
+      case "completeTodo": {
+         const index = state.findIndex((todo) => todo.id === action.id);
+
+         const selectedTodo = { ...state[index] };
+
+         selectedTodo.isCompleted = !selectedTodo.isCompleted;
+
+         const updatedTodos = [...state];
+         updatedTodos[index] = selectedTodo;
+         return updatedTodos;
+      }
+
       default:
          return state;
    }

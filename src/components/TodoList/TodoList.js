@@ -25,6 +25,9 @@ const TodoList = () => {
                      onRemove={() =>
                         dispatch({ type: "removeTodo", id: todo.id })
                      }
+                     onComplete={() =>
+                        dispatch({ type: "completeTodo", id: todo.id })
+                     }
                   />
                );
             })}

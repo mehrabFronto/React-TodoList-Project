@@ -1,5 +1,4 @@
 import React, { useContext, useReducer } from "react";
-import todosData from "../../db/Todos/TodosData";
 
 const TodosContext = React.createContext();
 const TodosContextDispatcher = React.createContext();
@@ -12,7 +11,9 @@ const reducer = (state, action) => {
             return state;
          }
 
-         return [
+         localStorage.setItem("todos", JSON.stringify(state));
+
+         const newTodo = [
             ...state,
             {
                id: Math.floor(Math.random() * 1000),
@@ -21,9 +22,13 @@ const reducer = (state, action) => {
                isCompleted: false,
             },
          ];
+         localStorage.setItem("todos", JSON.stringify(newTodo));
+         return newTodo;
       }
       case "removeTodo": {
-         return state.filter((todo) => todo.id !== action.id);
+         const filteredTodos = state.filter((todo) => todo.id !== action.id);
+         localStorage.setItem("todos", JSON.stringify(filteredTodos));
+         return filteredTodos;
       }
 
       case "completeTodo": {
@@ -35,6 +40,7 @@ const reducer = (state, action) => {
 
          const updatedTodos = [...state];
          updatedTodos[index] = selectedTodo;
+         localStorage.setItem("todos", JSON.stringify(updatedTodos));
          return updatedTodos;
       }
 
@@ -47,17 +53,19 @@ const reducer = (state, action) => {
 
          const updatedTodos = [...state];
          updatedTodos[index] = selectedTodo;
+         localStorage.setItem("todos", JSON.stringify(updatedTodos));
          return updatedTodos;
       }
 
       case "filterTodo": {
+         const todos = JSON.parse(localStorage.getItem("todos")) || [];
          switch (action.value) {
             case "completed":
-               return state.filter((todo) => todo.isCompleted);
+               return todos.filter((todo) => todo.isCompleted);
             case "uncompledted":
-               return state.filter((todo) => !todo.isCompleted);
+               return todos.filter((todo) => !todo.isCompleted);
             default:
-               return state;
+               return todos;
          }
       }
 
@@ -67,7 +75,10 @@ const reducer = (state, action) => {
 };
 
 const TodosProvider = ({ children }) => {
-   const [todos, dispatch] = useReducer(reducer, todosData);
+   const [todos, dispatch] = useReducer(
+      reducer,
+      JSON.parse(localStorage.getItem("todos")) || [],
+   );
 
    return (
       <TodosContext.Provider value={todos}>

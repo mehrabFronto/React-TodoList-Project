@@ -1,0 +1,18 @@
+.filter{
+    width: 50rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter__title{
+    font-size: 2rem;
+    color: #11123b;
+}
+
+.filter__select{
+    width: 180px;
+    font-size: 1.6rem;
+    color: #11123b;
+}

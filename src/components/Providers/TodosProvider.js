@@ -50,6 +50,17 @@ const reducer = (state, action) => {
          return updatedTodos;
       }
 
+      case "filterTodo": {
+         switch (action.value) {
+            case "completed":
+               return state.filter((todo) => todo.isCompleted);
+            case "uncompledted":
+               return state.filter((todo) => !todo.isCompleted);
+            default:
+               return state;
+         }
+      }
+
       default:
          return state;
    }

@@ -1,0 +1,17 @@
+.selectContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.title{
+    font-size: 1.6rem;
+    color: #11123b;
+}
+
+.select{
+    width: 160px;
+    font-size: 1.4rem;
+    color: #11123b;
+}

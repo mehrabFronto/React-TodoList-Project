@@ -16,7 +16,7 @@ const reducer = (state, action) => {
          const newTodo = [
             ...state,
             {
-               id: Math.floor(Math.random() * 1000),
+               id: new Date().getTime(),
                title: action.title,
                createdAt: new Date().toISOString(),
                isCompleted: false,

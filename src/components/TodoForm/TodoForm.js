@@ -1,8 +1,11 @@
 import styles from "./todoForm.module.css";
 import { useState, useEffect, useRef } from "react";
+import { useTodos, useTodosActions } from "../Providers/TodosProvider";
 
-const TodoForm = ({ onSubmitTodo, edit }) => {
+const TodoForm = ({ edit }) => {
    const [todoTitle, setTodoTitle] = useState("");
+
+   const dispatch = useTodosActions();
 
    useEffect(() => {
       inpuRef.current.focus();
@@ -12,7 +15,10 @@ const TodoForm = ({ onSubmitTodo, edit }) => {
 
    const submitHandler = (e) => {
       e.preventDefault();
-      onSubmitTodo(todoTitle);
+      if (!todoTitle) {
+         return alert("please enter the todo title...");
+      }
+      dispatch({ type: "addTodo", todoTitle });
       setTodoTitle("");
    };
 

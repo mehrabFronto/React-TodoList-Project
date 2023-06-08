@@ -7,7 +7,7 @@ const TodosContextDispatcher = React.createContext();
 const reducer = (state, action) => {
    switch (action.type) {
       case "addTodo": {
-         const todos = JSON.parse(localStorage.getItem("todos"));
+         const todos = JSON.parse(localStorage.getItem("todos")) || [];
          const newTodoList = [
             ...todos,
             {
@@ -61,17 +61,26 @@ const reducer = (state, action) => {
       }
 
       case "editTodo": {
-         const index = state.findIndex((todo) => todo.id === action.id);
+         {
+            const todos = JSON.parse(localStorage.getItem("todos"));
+            const index = todos.findIndex((todo) => todo.id === action.id);
+            const selectedTodo = todos[index];
+            selectedTodo.title = action.todoTitle;
+            const updatedTodos = todos;
+            updatedTodos[index] = selectedTodo;
+            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+         }
 
-         const selectedTodo = { ...state[index] };
-
-         selectedTodo.title = action.todoTitle;
-
-         const updatedTodos = [...state];
-         updatedTodos[index] = selectedTodo;
-         localStorage.setItem("todos", JSON.stringify(updatedTodos));
          toast.success("comment successfully edited");
-         return updatedTodos;
+
+         {
+            const index = state.findIndex((todo) => todo.id === action.id);
+            const selectedTodo = { ...state[index] };
+            selectedTodo.title = action.todoTitle;
+            const updatedTodos = [...state];
+            updatedTodos[index] = selectedTodo;
+            return updatedTodos;
+         }
       }
 
       case "filterTodo": {

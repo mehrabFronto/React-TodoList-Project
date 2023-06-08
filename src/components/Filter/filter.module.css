@@ -1,8 +1,8 @@
 .filter{
-    width: 50rem;
+    padding: 0 1rem;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: start;
     margin-bottom: 20px;
 }
 
@@ -15,4 +15,17 @@
     width: 180px;
     font-size: 1.6rem;
     color: #11123b;
+}
+
+@media screen and (min-width:768px) {
+    .filter{
+        padding: 0;
+        width: 40rem;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .filter{
+        width: 50rem;
+    }
 }

@@ -1,6 +1,6 @@
 .todo__list{
     margin-top: 30px;
-    width: 52rem;
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     display: flex;
@@ -17,4 +17,16 @@
     color: #11123b;
     margin-top: 20px;
     font-size: 2rem;
+}
+
+@media screen and (min-width:768px) {
+    .todo__list{
+        width: 42rem;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .todo__list{
+        width: 52rem;
+    }
 }

@@ -1,4 +1,5 @@
 import React, { useContext, useReducer } from "react";
+import { toast } from "react-toastify";
 
 const TodosContext = React.createContext();
 const TodosContextDispatcher = React.createContext();
@@ -23,11 +24,13 @@ const reducer = (state, action) => {
             },
          ];
          localStorage.setItem("todos", JSON.stringify(newTodo));
+         toast.success("comment successfully added");
          return newTodo;
       }
       case "removeTodo": {
          const filteredTodos = state.filter((todo) => todo.id !== action.id);
          localStorage.setItem("todos", JSON.stringify(filteredTodos));
+         toast.success("comment successfully deleted");
          return filteredTodos;
       }
 
@@ -54,6 +57,7 @@ const reducer = (state, action) => {
          const updatedTodos = [...state];
          updatedTodos[index] = selectedTodo;
          localStorage.setItem("todos", JSON.stringify(updatedTodos));
+         toast.success("comment successfully edited");
          return updatedTodos;
       }
 

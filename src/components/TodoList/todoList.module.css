@@ -19,14 +19,82 @@
     font-size: 2rem;
 }
 
+.backdrop{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+}
+
+
+.edit__form{
+    width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: 40px;
+    padding: 1rem 2rem;
+    background-color: #cac2b1;
+    box-shadow:  0 5px 15px rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+.edit__header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit__header h2{
+    font-size: 2rem;
+}
+
+.x{
+    padding: 1rem;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 2.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
 @media screen and (min-width:768px) {
+
+    .x:hover{
+        color: red;
+    }
+
     .todo__list{
         width: 42rem;
+    }
+
+    .edit__form{
+        width: 50rem;
     }
 }
 
 @media screen and (min-width:1024px) {
     .todo__list{
         width: 52rem;
+    }
+
+    .edit__form{
+        width: 60rem;
     }
 }

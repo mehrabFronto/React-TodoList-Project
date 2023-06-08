@@ -1,67 +1,31 @@
-import styles from "./todoForm.module.css";
-import { useState, useEffect, useRef } from "react";
+import FormComponent from "../../common/Form/FormComponent";
+import { useTodosActions } from "../Providers/TodosProvider";
+import { useState } from "react";
 
-const TodoForm = ({ onSubmitTodo, edit }) => {
+const TodoForm = () => {
    const [todoTitle, setTodoTitle] = useState("");
 
-   useEffect(() => {
-      inpuRef.current.focus();
-   }, []);
+   const dispatch = useTodosActions();
 
-   const inpuRef = useRef(null);
+   const filterValue = JSON.parse(localStorage.getItem("filterValue"));
 
    const submitHandler = (e) => {
+      if (!todoTitle) {
+         return alert("please enter the todo title...");
+      }
       e.preventDefault();
-      onSubmitTodo(todoTitle);
+      dispatch({ type: "addTodo", title: todoTitle });
+      dispatch({ type: "filterTodo", value: filterValue });
       setTodoTitle("");
    };
 
-   const changeHandler = (e) => {
-      setTodoTitle(e.target.value);
-   };
-
    return (
-      <form onSubmit={submitHandler}>
-         {!edit ? (
-            <>
-               <h2 className={styles.form__label}>todo title:</h2>
-               <div className={styles.from__warpper}>
-                  <input
-                     type="text"
-                     className={styles.form__input}
-                     placeholder="todo..."
-                     onChange={changeHandler}
-                     value={todoTitle}
-                     ref={inpuRef}
-                  />
-                  <button
-                     type="submit"
-                     className={styles.form__button}>
-                     Add
-                  </button>
-               </div>
-            </>
-         ) : (
-            <>
-               <h2 className={styles.form__label}>update:</h2>
-               <div className={styles.from__warpper}>
-                  <input
-                     type="text"
-                     className={styles.form__input}
-                     placeholder="update todo title..."
-                     onChange={changeHandler}
-                     value={todoTitle}
-                     ref={inpuRef}
-                  />
-                  <button
-                     type="submit"
-                     className={styles.form__button}>
-                     update
-                  </button>
-               </div>
-            </>
-         )}
-      </form>
+      <FormComponent
+         onSubmit={submitHandler}
+         inputValue={todoTitle}
+         setTodoTitle={setTodoTitle}
+         btnText="Add"
+      />
    );
 };
 

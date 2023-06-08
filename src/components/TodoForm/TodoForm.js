@@ -1,11 +1,13 @@
+import { useTodosActions } from "../Providers/TodosProvider";
 import styles from "./todoForm.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useTodos, useTodosActions } from "../Providers/TodosProvider";
 
 const TodoForm = ({ edit }) => {
    const [todoTitle, setTodoTitle] = useState("");
 
    const dispatch = useTodosActions();
+
+   const filterValue = JSON.parse(localStorage.getItem("filterValue"));
 
    useEffect(() => {
       inpuRef.current.focus();
@@ -14,11 +16,12 @@ const TodoForm = ({ edit }) => {
    const inpuRef = useRef(null);
 
    const submitHandler = (e) => {
-      e.preventDefault();
       if (!todoTitle) {
          return alert("please enter the todo title...");
       }
-      dispatch({ type: "addTodo", todoTitle });
+      e.preventDefault();
+      dispatch({ type: "addTodo", title: todoTitle });
+      dispatch({ type: "filterTodo", value: filterValue });
       setTodoTitle("");
    };
 

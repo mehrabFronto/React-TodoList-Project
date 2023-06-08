@@ -7,15 +7,9 @@ const TodosContextDispatcher = React.createContext();
 const reducer = (state, action) => {
    switch (action.type) {
       case "addTodo": {
-         if (!action.title) {
-            alert("please enter the todo title...");
-            return state;
-         }
-
-         localStorage.setItem("todos", JSON.stringify(state));
-
-         const newTodo = [
-            ...state,
+         const todos = JSON.parse(localStorage.getItem("todos"));
+         const newTodoList = [
+            ...todos,
             {
                id: new Date().getTime(),
                title: action.title,
@@ -23,28 +17,47 @@ const reducer = (state, action) => {
                isCompleted: false,
             },
          ];
-         localStorage.setItem("todos", JSON.stringify(newTodo));
+         localStorage.setItem("todos", JSON.stringify(newTodoList));
          toast.success("comment successfully added");
-         return newTodo;
+         return newTodoList;
       }
+
       case "removeTodo": {
-         const filteredTodos = state.filter((todo) => todo.id !== action.id);
-         localStorage.setItem("todos", JSON.stringify(filteredTodos));
+         // update localStorage
+         {
+            const todos = JSON.parse(localStorage.getItem("todos"));
+            const filteredTodos = todos.filter((todo) => todo.id !== action.id);
+            localStorage.setItem("todos", JSON.stringify(filteredTodos));
+         }
+
          toast.success("comment successfully deleted");
-         return filteredTodos;
+         // update state
+         {
+            const filteredTodos = state.filter((todo) => todo.id !== action.id);
+            return filteredTodos;
+         }
       }
 
       case "completeTodo": {
-         const index = state.findIndex((todo) => todo.id === action.id);
+         // update localStorage
+         {
+            const todos = JSON.parse(localStorage.getItem("todos"));
+            const todoIndex = todos.findIndex((todo) => todo.id === action.id);
+            const selectedTodo = todos[todoIndex];
+            selectedTodo.isCompleted = !selectedTodo.isCompleted;
+            const updatedTodos = todos;
+            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+         }
 
-         const selectedTodo = { ...state[index] };
-
-         selectedTodo.isCompleted = !selectedTodo.isCompleted;
-
-         const updatedTodos = [...state];
-         updatedTodos[index] = selectedTodo;
-         localStorage.setItem("todos", JSON.stringify(updatedTodos));
-         return updatedTodos;
+         // update state
+         {
+            const todoIndex = state.findIndex((todo) => todo.id === action.id);
+            const selectedTodo = { ...state[todoIndex] };
+            selectedTodo.isCompleted = !selectedTodo.isCompleted;
+            const updatedTodos = [...state];
+            updatedTodos[todoIndex] = selectedTodo;
+            return updatedTodos;
+         }
       }
 
       case "editTodo": {

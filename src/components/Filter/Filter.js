@@ -21,7 +21,12 @@ const Filter = () => {
 
    useEffect(() => {
       setValue({ value: "", label: "All" });
+      localStorage.setItem("filterValue", JSON.stringify(value));
    }, []);
+
+   useEffect(() => {
+      localStorage.setItem("filterValue", JSON.stringify(value.value));
+   }, [value]);
 
    return (
       <div className={styles.filter}>

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useTodosActions } from "../Providers/TodosProvider";
+import { useState } from "react";
 import SelectComponent from "../../common/Select/Select";
+import { useTodosActions } from "../Providers/TodosProvider";
 import styles from "./filter.module.css";
 
 const options = [
@@ -18,15 +18,6 @@ const Filter = () => {
       setValue(selectedOption);
       dispatch({ type: "filterTodo", value: selectedOption.value });
    };
-
-   useEffect(() => {
-      setValue({ value: "", label: "All" });
-      localStorage.setItem("filterValue", JSON.stringify(value));
-   }, []);
-
-   useEffect(() => {
-      localStorage.setItem("filterValue", JSON.stringify(value.value));
-   }, [value]);
 
    return (
       <div className={styles.filter}>

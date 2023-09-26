@@ -45,8 +45,7 @@ const reducer = (state, action) => {
             const todoIndex = todos.findIndex((todo) => todo.id === action.id);
             const selectedTodo = todos[todoIndex];
             selectedTodo.isCompleted = !selectedTodo.isCompleted;
-            const updatedTodos = todos;
-            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+            localStorage.setItem("todos", JSON.stringify(todos));
          }
 
          // update state
@@ -66,9 +65,7 @@ const reducer = (state, action) => {
             const index = todos.findIndex((todo) => todo.id === action.id);
             const selectedTodo = todos[index];
             selectedTodo.title = action.todoTitle;
-            const updatedTodos = todos;
-            updatedTodos[index] = selectedTodo;
-            localStorage.setItem("todos", JSON.stringify(updatedTodos));
+            localStorage.setItem("todos", JSON.stringify(todos));
          }
 
          toast.success("Todo successfully edited");

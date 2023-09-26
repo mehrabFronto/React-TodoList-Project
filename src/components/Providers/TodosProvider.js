@@ -18,7 +18,7 @@ const reducer = (state, action) => {
             },
          ];
          localStorage.setItem("todos", JSON.stringify(newTodoList));
-         toast.success("comment successfully added");
+         toast.success("Todo successfully added");
          return newTodoList;
       }
 
@@ -30,7 +30,7 @@ const reducer = (state, action) => {
             localStorage.setItem("todos", JSON.stringify(filteredTodos));
          }
 
-         toast.success("comment successfully deleted");
+         toast.success("Todo successfully deleted");
          // update state
          {
             const filteredTodos = state.filter((todo) => todo.id !== action.id);
@@ -71,7 +71,7 @@ const reducer = (state, action) => {
             localStorage.setItem("todos", JSON.stringify(updatedTodos));
          }
 
-         toast.success("comment successfully edited");
+         toast.success("Todo successfully edited");
 
          {
             const index = state.findIndex((todo) => todo.id === action.id);
